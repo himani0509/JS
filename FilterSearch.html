@@ -1,0 +1,29 @@
+<html>
+<head>
+</head>
+<body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<script>
+
+function searchItem(){
+    var filter = $("#searchText").val().toUpperCase();
+	var li = $('#dispList li');
+	
+	for (i = 0; i < li.length; i++) {
+        if (li[i].innerHTML.toUpperCase().indexOf(filter) > -1)
+            li[i].style.display = "";
+        else
+            li[i].style.display = "none";
+    }
+};
+
+
+</script>
+     <input type="text" id="searchText" onkeyup="searchItem()"></input>
+     <ul id = "dispList">
+	 <li> Varenya</li>
+	 <li> Himani</li>
+	 <li> McAfee</li>
+	 </ul>
+</body>
+</html>
