@@ -1,0 +1,45 @@
+<html>
+<head>
+</head>
+<body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+
+     <input type="text" id="searchText" onkeyup="searchItem()"></input>
+     <ul id = "dispList">
+	 <li><input type="checkbox" name="change" value="Varenya"> Varenya </input></li>
+	 <li><input type="checkbox" name="change" value="Himani">Himani</input></li>
+	 <li><input type="checkbox" name="change" value="McAfee">McAfee</input></li>
+	 </ul>
+	 <div id="selectedTask"> Selected Tasks : <br>
+	    <ul id="showList">
+		</ul>
+	 </div>
+	 
+<script>
+var li = $('#dispList li');
+
+function searchItem(){
+    var filter = $("#searchText").val().toUpperCase();
+	for (i = 0; i < li.length; i++) {
+        if (li[i].innerHTML.toUpperCase().indexOf(filter) > -1)
+            li[i].style.display = "";
+        else
+            li[i].style.display = "none";
+    }
+};
+
+$('input[type="checkbox"][name="change"]').change(function() {
+     var li_selected = $("#selectedTask ul li");
+	 var input_checked = $('#dispList li input');
+	 $('#selectedTask ul').html("");
+	 
+	 for (i = 0; i < li.length; i++) {
+	    if (input_checked[i].checked) {
+	       $('#selectedTask ul').append("<li>" + input_checked[i].value + "</li>");
+	    }
+     }		
+ });
+
+</script>
+</body>
+</html>
