@@ -22,7 +22,7 @@
 
 var orig_list = ["Himani","Varenya","McAfee"];
 
-function showTaskCount(li,input_checked){
+function showTaskCount(){
     var li = $('#dispList li');
     var input_checked = $('#dispList li input');
     var select_count=0;
@@ -69,7 +69,7 @@ function deleteTask(){
         }
     }	
 	readyDOM();
-    showTaskCount(li,input_checked);
+    showTaskCount();
 };
 console.log("before ready");
 console.log($('input[type="checkbox"]'));
