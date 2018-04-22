@@ -20,14 +20,30 @@
 <script>
 
 var orig_list = ["Himani","Varenya","McAfee"];
-$( document ).ready(function() {
+
+function readyDOM(){
+
     ul = $('#dispList');
 	for(i=0; i<orig_list.length; i++){
 	   $('#dispList').append("<li><input type='checkbox' name='change' value='" + orig_list[i] +"'>"  + orig_list[i] + "</input></li>"); 
 	}
-});
+    var li = $('#dispList li');
+    $('input[type="checkbox"][name="change"]').change(function() {
+        console.log("Hey");
+        var li_selected = $("#selectedTask ul li");
+        var input_checked = $('#dispList li input');
+        console.log(input_checked,"input_checked")
+        $('#selectedTask ul').html("");
+        
+        for (i = 0; i < li.length; i++) {
+            if (input_checked[i].checked) {
+              $('#selectedTask ul').append("<li>" + input_checked[i].value + "</li>");
+            }
+        }		
+    });
+}
+$( document ).ready(readyDOM);
 
-var li = $('#dispList li');
 function searchItem(){
     var filter = $("#searchText").val().toUpperCase();
 	for (i = 0; i < li.length; i++) {
@@ -37,19 +53,9 @@ function searchItem(){
             li[i].style.display = "none";
     }
 };
+console.log("before ready")
 
-$('input[type="checkbox"][name="change"]').change(function() {
-     console.log("Hey");
-     var li_selected = $("#selectedTask ul li");
-	 var input_checked = $('#dispList li input');
-	 $('#selectedTask ul').html("");
-	 
-	 for (i = 0; i < li.length; i++) {
-	    if (input_checked[i].checked) {
-	       $('#selectedTask ul').append("<li>" + input_checked[i].value + "</li>");
-	    }
-     }		
- });
+console.log($('input[type="checkbox"]'))
 
 </script>
 </body>
