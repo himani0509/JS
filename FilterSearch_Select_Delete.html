@@ -12,39 +12,43 @@
 	 <li><input type="checkbox" name="change" value="McAfee">McAfee</input></li>
 	 -->
 	 </ul>
-	 <div id="selectedTask"> Selected Tasks : <br>
-	    <ul id="showList">
-		</ul>
+	 <button id="deleteTasks" onclick="deleteTask()"> Delete </button><br><br>
+	 <div id="selectedTask"> 
+	    <!--<ul id="showList">
+		</ul>-->
 	 </div>
 	 
 <script>
 
 var orig_list = ["Himani","Varenya","McAfee"];
 
+function showTaskCount(li,input_checked){
+    var li = $('#dispList li');
+    var input_checked = $('#dispList li input');
+    var select_count=0;
+    for (i = 0; i < li.length; i++) {
+        if (input_checked[i].checked)
+			  select_count++;
+        }
+	$('#selectedTask').html("Total selected Tasks :" + select_count);
+}
+
 function readyDOM(){
 
     ul = $('#dispList');
+	$('#dispList').html("");
 	for(i=0; i<orig_list.length; i++){
 	   $('#dispList').append("<li><input type='checkbox' name='change' value='" + orig_list[i] +"'>"  + orig_list[i] + "</input></li>"); 
 	}
     var li = $('#dispList li');
     $('input[type="checkbox"][name="change"]').change(function() {
-        console.log("Hey");
-        var li_selected = $("#selectedTask ul li");
-        var input_checked = $('#dispList li input');
-        console.log(input_checked,"input_checked")
-        $('#selectedTask ul').html("");
-        
-        for (i = 0; i < li.length; i++) {
-            if (input_checked[i].checked) {
-              $('#selectedTask ul').append("<li>" + input_checked[i].value + "</li>");
-            }
-        }		
+        showTaskCount();	
     });
 }
 $( document ).ready(readyDOM);
 
 function searchItem(){
+    var li = $('#dispList li');
     var filter = $("#searchText").val().toUpperCase();
 	for (i = 0; i < li.length; i++) {
         if (li[i].innerHTML.toUpperCase().indexOf(filter) > -1)
@@ -53,9 +57,22 @@ function searchItem(){
             li[i].style.display = "none";
     }
 };
-console.log("before ready")
 
-console.log($('input[type="checkbox"]'))
+function deleteTask(){
+    var li = $('#dispList li');
+	var input_checked = $('#dispList li input');
+	for (i = 0; i < li.length; i++) {
+        if (input_checked[i].checked) {
+            var index = orig_list.indexOf(input_checked[i].value);
+            if (index > -1)
+              orig_list.splice(index, 1);
+        }
+    }	
+	readyDOM();
+    showTaskCount(li,input_checked);
+};
+console.log("before ready");
+console.log($('input[type="checkbox"]'));
 
 </script>
 </body>
